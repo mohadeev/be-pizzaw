@@ -2,14 +2,12 @@ import ingredModal from "../db/schema/ingredModal.js";
 import fs from "fs";
 
 // Read the JSON file from disk
-const jsonString = fs.readFileSync("./statics/ingreds.json", "utf-8");
+const jsonString = fs.readFileSync("/statics/ingreds.json", "utf-8");
 
 const createAllIngreds = async () => {
   const data = JSON.parse(jsonString);
   ingredModal.find({}).then(async (ingreds) => {
-
     if (ingreds && ingreds.length > 0) {
-
       const tergetedChild = ingreds[0];
       const documentId = tergetedChild._id;
 
@@ -22,7 +20,6 @@ const createAllIngreds = async () => {
       } catch (error) {
         console.log(error);
       }
-      
     } else if (ingreds.length <= 0) {
       ingredModal.create({});
       console.log("created");
